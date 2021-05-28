@@ -1,4 +1,4 @@
-import * as CryptoJS from "crypto-js";
+import CryptoJS from "crypto-js";
 import * as fs from "fs/promises";
 import * as path from "path";
 
@@ -42,17 +42,14 @@ class FileManager {
     }
   }
 
-
   public getPath(name: string): string {
     const hasFileType = (/^.*\.([a-zA-Z]{1,})$/).test(name)
     if (hasFileType) {
-
       const names = name.split('.')
       const fileType = names[names.length - 1]
       if (fileType === 'potion-file') {
         const filePath = path.resolve(__dirname, '..', 'tmp', name)
         return filePath
-
       } else {
         const fileName = `${names.filter((e, i, a) => i + 1 !== a.length).join('.')}.potion-file`
         const filePath = path.resolve(__dirname, '..', 'tmp', fileName)
@@ -65,7 +62,4 @@ class FileManager {
   }
 }
 
-const fileManager = new FileManager()
-
-export { fileManager }
-export default fileManager
+export const fileManager = new FileManager()
